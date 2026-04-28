@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Son Caribe Stereo</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg,#000,#1a1a1a);
+  color:#fff;
+  text-align:center;
+}
+
+/* HEADER */
+.header{
+  display:flex;
+  justify-content:space-between;
+  padding:15px;
+}
+
+.icon{
+  font-size:24px;
+  color:#ff5a00;
+  cursor:pointer;
+}
+
+/* LOGO */
+.logo img{
+  width:220px;
+  margin-top:10px;
+}
+
+/* PLAYER */
+.play-btn{
+  width:95px;
+  height:95px;
+  border-radius:50%;
+  background: linear-gradient(45deg,#ff3c00,#ff8c00);
+  border:none;
+  color:#fff;
+  font-size:32px;
+  margin-top:20px;
+}
+
+/* VOLUMEN */
+input[type=range]{
+  width:80%;
+  margin:15px;
+}
+
+/* TEXTO */
+#song{
+  color:#ccc;
+  margin-top:10px;
+  font-size:15px;
+}
+
+/* REDES */
+.social{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  display:flex;
+  justify-content:space-around;
+  background:#111;
+  padding:12px 0;
+}
+
+.social a{
+  color:#ff5a00;
+  font-size:22px;
+  text-decoration:none;
+}
+
+/* MENU */
+.menu{
+  position:fixed;
+  top:0;
+  left:-100%;
+  width:75%;
+  height:100%;
+  background:#000;
+  transition:.3s;
+}
+
+.menu a{
+  display:block;
+  padding:15px;
+  color:#fff;
+  text-decoration:none;
+  border-bottom:1px solid #222;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MENU -->
+<div id="menu" class="menu">
+  <a href="#">🏠 Inicio</a>
+  <a href="#">📻 En Vivo</a>
+  <a href="https://afradio.es/public/soncaribestereo/schedule" target="_blank">📅 Programación</a>
+
+  <!-- CAMBIA ESTA URL -->
+  <a href="TU_URL_DE_NOTICIAS_AQUI" target="_blank">📰 Noticias</a>
+
+  <a href="https://afradio.es/public/soncaribestereo/podcasts" target="_blank">🎧 Podcast</a>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="icon" onclick="toggleMenu()">☰</div>
+  <div class="icon" onclick="shareApp()">🔗</div>
+</div>
+
+<!-- LOGO -->
+<div class="logo">
+  <img src="https://postimg.cc/jnjszb5C">
+</div>
+
+<!-- PLAYER -->
+<button id="playBtn" class="play-btn">▶</button>
+
+<br>
+
+<input type="range" min="0" max="1" step="0.01" value="1" id="vol">
+
+<div id="song">Presiona play para escuchar</div>
+
+<audio id="radio" preload="none">
+  <source src="https://afradio.es/listen/soncaribestereo/radio.mp3" type="audio/mpeg">
+</audio>
+
+<!-- REDES -->
+<div class="social">
+  <a href="https://www.facebook.com/pablo.h.polo.9" target="_blank">f</a>
+  <a href="whatsapp://send?text=Escucha Son Caribe Stereo&phone=573173813699">🟢</a>
+  <a href="https://tiktok.com/@pauloturo" target="_blank">🎵</a>
+  <a href="https://afradio.es/public/soncaribestereo/podcasts" target="_blank">🎧</a>
+</div>
+
+<script>
+const audio = document.getElementById("radio");
+const btn = document.getElementById("playBtn");
+const vol = document.getElementById("vol");
+
+let started = false;
+
+/* 🔥 PLAY ESTABLE PARA WEBVIEW */
+btn.addEventListener("click", () => {
+
+  if(!started){
+    audio.load();
+    started = true;
+  }
+
+  if(audio.paused){
+    audio.play().then(()=>{
+      btn.innerHTML = "⏸";
+    }).catch(()=>{
+      alert("Toca nuevamente para iniciar la radio");
+    });
+  }else{
+    audio.pause();
+    btn.innerHTML = "▶";
+  }
+
+});
+
+/* VOLUMEN */
+vol.addEventListener("input", () => {
+  audio.volume = vol.value;
+});
+
+/* MENU */
+function toggleMenu(){
+  let m = document.getElementById("menu");
+  m.style.left = (m.style.left === "0px") ? "-100%" : "0";
+}
+
+/* COMPARTIR */
+function shareApp(){
+  if(navigator.share){
+    navigator.share({
+      title:"Son Caribe Stereo",
+      text:"Escucha en vivo",
+      url:location.href
+    });
+  }else{
+    alert("Comparte: " + location.href);
+  }
+}
+
+/* 🔥 METADATA ESTABLE */
+setInterval(()=>{
+fetch("https://afradio.es/api/nowplaying/soncaribestereo")
+.then(r=>r.json())
+.then(d=>{
+let song = d.now_playing.song;
+document.getElementById("song").innerText =
+(song.artist ? song.artist + " - " : "") + song.title;
+})
+.catch(()=>{});
+},8000);
+
+/* 🔥 RECONEXIÓN AUTOMÁTICA */
+audio.addEventListener("error", ()=>{
+  setTimeout(()=>{
+    audio.load();
+    audio.play();
+  },3000);
+});
+
+/* 🔥 MANTENER AUDIO ACTIVO */
+document.addEventListener("visibilitychange", () => {
+  if(!document.hidden && !audio.paused){
+    audio.play();
+  }
+});
+</script>
+
+</body>
+</html>
