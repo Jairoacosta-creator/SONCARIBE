@@ -6,27 +6,25 @@
 <title>Son Caribe Stereo</title>
 
 <style>
-
-/* 🌅 FONDO CARIBEÑO */
 body{
   margin:0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(180deg,#0a0a0a,#1a0f0a,#ff5a00,#ff8c00);
+  background: linear-gradient(180deg,#000,#1a0f0a,#ff4d00,#ff8c00);
   height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
 }
 
-/* 📱 CONTENEDOR APP */
+/* CONTENEDOR APP */
 .app{
   width:100%;
   max-width:380px;
   height:90vh;
   background: rgba(0,0,0,0.65);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(15px);
   border-radius:25px;
-  box-shadow:0 0 40px rgba(0,0,0,0.6);
+  box-shadow:0 0 50px rgba(0,0,0,0.7);
   display:flex;
   flex-direction:column;
   overflow:hidden;
@@ -50,10 +48,8 @@ body{
   text-align:center;
   margin-top:10px;
 }
-
 .logo img{
   width:200px;
-  opacity:0.95;
 }
 
 /* PLAYER */
@@ -65,7 +61,6 @@ body{
   align-items:center;
 }
 
-/* BOTÓN PLAY */
 .play-btn{
   width:100px;
   height:100px;
@@ -75,7 +70,7 @@ body{
   color:#fff;
   cursor:pointer;
   background: linear-gradient(45deg,#ff3c00,#ff8c00);
-  box-shadow:0 0 25px rgba(255,100,0,0.6);
+  box-shadow:0 0 30px rgba(255,100,0,0.7);
 }
 
 /* VOLUMEN */
@@ -93,15 +88,15 @@ input[type=range]{
   padding:0 20px;
 }
 
-/* REDES */
-.social{
+/* FOOTER REDES */
+.footer{
   display:flex;
   justify-content:space-around;
   padding:12px;
-  background:rgba(0,0,0,0.4);
+  background:rgba(0,0,0,0.5);
 }
 
-.social a{
+.footer a{
   color:#ff8c00;
   font-size:22px;
   text-decoration:none;
@@ -116,7 +111,7 @@ input[type=range]{
   height:100%;
   background:#000;
   transition:.3s;
-  padding-top:50px;
+  padding-top:60px;
 }
 
 .menu a{
@@ -126,7 +121,6 @@ input[type=range]{
   text-decoration:none;
   border-bottom:1px solid #222;
 }
-
 </style>
 </head>
 
@@ -138,7 +132,10 @@ input[type=range]{
 <div id="menu" class="menu">
   <a href="#">🏠 Inicio</a>
   <a href="https://afradio.es/public/soncaribestereo/schedule" target="_blank">📅 Programación</a>
-  <a href="TU_URL_DE_NOTICIAS_AQUI" target="_blank">📰 Noticias</a>
+  
+  <!-- AQUI PONES TU URL -->
+  <a href="https://tusitio.com/noticias" target="_blank">📰 Noticias</a>
+  
   <a href="https://afradio.es/public/soncaribestereo/podcasts" target="_blank">🎧 Podcast</a>
 </div>
 
@@ -160,7 +157,7 @@ input[type=range]{
 
 <input type="range" min="0" max="1" step="0.01" value="1" id="vol">
 
-<div id="song">Presiona play</div>
+<div id="song">Presiona play para escuchar</div>
 
 <audio id="radio">
   <source src="https://afradio.es/listen/soncaribestereo/radio.mp3">
@@ -168,8 +165,8 @@ input[type=range]{
 
 </div>
 
-<!-- REDES -->
-<div class="social">
+<!-- REDES ABAJO -->
+<div class="footer">
   <a href="https://www.facebook.com/pablo.h.polo.9">f</a>
   <a href="whatsapp://send?phone=573173813699">🟢</a>
   <a href="https://tiktok.com/@pauloturo">🎵</a>
