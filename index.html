@@ -6,12 +6,30 @@
 <title>Son Caribe Stereo</title>
 
 <style>
+
+/* 🌅 FONDO CARIBEÑO */
 body{
   margin:0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(180deg,#000,#1a1a1a);
-  color:#fff;
-  text-align:center;
+  background: linear-gradient(180deg,#0a0a0a,#1a0f0a,#ff5a00,#ff8c00);
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* 📱 CONTENEDOR APP */
+.app{
+  width:100%;
+  max-width:380px;
+  height:90vh;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(12px);
+  border-radius:25px;
+  box-shadow:0 0 40px rgba(0,0,0,0.6);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
 }
 
 /* HEADER */
@@ -19,71 +37,86 @@ body{
   display:flex;
   justify-content:space-between;
   padding:15px;
+  color:#fff;
 }
 
 .icon{
-  font-size:24px;
-  color:#ff5a00;
+  font-size:22px;
   cursor:pointer;
 }
 
 /* LOGO */
-.logo img{
-  width:220px;
+.logo{
+  text-align:center;
   margin-top:10px;
 }
 
+.logo img{
+  width:200px;
+  opacity:0.95;
+}
+
 /* PLAYER */
+.player{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+/* BOTÓN PLAY */
 .play-btn{
-  width:95px;
-  height:95px;
+  width:100px;
+  height:100px;
   border-radius:50%;
-  background: linear-gradient(45deg,#ff3c00,#ff8c00);
   border:none;
+  font-size:35px;
   color:#fff;
-  font-size:32px;
-  margin-top:20px;
+  cursor:pointer;
+  background: linear-gradient(45deg,#ff3c00,#ff8c00);
+  box-shadow:0 0 25px rgba(255,100,0,0.6);
 }
 
 /* VOLUMEN */
 input[type=range]{
-  width:80%;
-  margin:15px;
+  width:70%;
+  margin-top:20px;
 }
 
-/* TEXTO */
+/* CANCIÓN */
 #song{
-  color:#ccc;
-  margin-top:10px;
-  font-size:15px;
+  margin-top:15px;
+  color:#eee;
+  font-size:14px;
+  text-align:center;
+  padding:0 20px;
 }
 
 /* REDES */
 .social{
-  position:fixed;
-  bottom:0;
-  width:100%;
   display:flex;
   justify-content:space-around;
-  background:#111;
-  padding:12px 0;
+  padding:12px;
+  background:rgba(0,0,0,0.4);
 }
 
 .social a{
-  color:#ff5a00;
+  color:#ff8c00;
   font-size:22px;
   text-decoration:none;
 }
 
 /* MENU */
 .menu{
-  position:fixed;
-  top:0;
+  position:absolute;
   left:-100%;
-  width:75%;
+  top:0;
+  width:70%;
   height:100%;
   background:#000;
   transition:.3s;
+  padding-top:50px;
 }
 
 .menu a{
@@ -93,20 +126,19 @@ input[type=range]{
   text-decoration:none;
   border-bottom:1px solid #222;
 }
+
 </style>
 </head>
 
 <body>
 
+<div class="app">
+
 <!-- MENU -->
 <div id="menu" class="menu">
   <a href="#">🏠 Inicio</a>
-  <a href="#">📻 En Vivo</a>
   <a href="https://afradio.es/public/soncaribestereo/schedule" target="_blank">📅 Programación</a>
-
-  <!-- CAMBIA ESTA URL -->
   <a href="TU_URL_DE_NOTICIAS_AQUI" target="_blank">📰 Noticias</a>
-
   <a href="https://afradio.es/public/soncaribestereo/podcasts" target="_blank">🎧 Podcast</a>
 </div>
 
@@ -118,28 +150,32 @@ input[type=range]{
 
 <!-- LOGO -->
 <div class="logo">
-  <img src="https://i.postimg.cc/rs1K2y2G/Whats-App-Image-2026-04-13-at-21-removebg-preview.png">
+  <img src="https://i.postimg.cc/jnjszb5C/tu-imagen.png">
 </div>
 
 <!-- PLAYER -->
-<button id="playBtn" class="play-btn">▶</button>
+<div class="player">
 
-<br>
+<button id="playBtn" class="play-btn">▶</button>
 
 <input type="range" min="0" max="1" step="0.01" value="1" id="vol">
 
-<div id="song">Presiona play para escuchar</div>
+<div id="song">Presiona play</div>
 
-<audio id="radio" preload="none">
-  <source src="https://afradio.es/listen/soncaribestereo/radio.mp3" type="audio/mpeg">
+<audio id="radio">
+  <source src="https://afradio.es/listen/soncaribestereo/radio.mp3">
 </audio>
+
+</div>
 
 <!-- REDES -->
 <div class="social">
-  <a href="https://www.facebook.com/pablo.h.polo.9" target="_blank">f</a>
-  <a href="whatsapp://send?text=Escucha Son Caribe Stereo&phone=573173813699">🟢</a>
-  <a href="https://tiktok.com/@pauloturo" target="_blank">🎵</a>
-  <a href="https://afradio.es/public/soncaribestereo/podcasts" target="_blank">🎧</a>
+  <a href="https://www.facebook.com/pablo.h.polo.9">f</a>
+  <a href="whatsapp://send?phone=573173813699">🟢</a>
+  <a href="https://tiktok.com/@pauloturo">🎵</a>
+  <a href="https://afradio.es/public/soncaribestereo/podcasts">🎧</a>
+</div>
+
 </div>
 
 <script>
@@ -147,79 +183,43 @@ const audio = document.getElementById("radio");
 const btn = document.getElementById("playBtn");
 const vol = document.getElementById("vol");
 
-let started = false;
-
-/* 🔥 PLAY ESTABLE PARA WEBVIEW */
-btn.addEventListener("click", () => {
-
-  if(!started){
-    audio.load();
-    started = true;
-  }
-
+btn.onclick = () => {
   if(audio.paused){
-    audio.play().then(()=>{
-      btn.innerHTML = "⏸";
-    }).catch(()=>{
-      alert("Toca nuevamente para iniciar la radio");
-    });
+    audio.play();
+    btn.innerHTML="⏸";
   }else{
     audio.pause();
-    btn.innerHTML = "▶";
+    btn.innerHTML="▶";
   }
+};
 
-});
+vol.oninput = () => audio.volume = vol.value;
 
-/* VOLUMEN */
-vol.addEventListener("input", () => {
-  audio.volume = vol.value;
-});
-
-/* MENU */
 function toggleMenu(){
   let m = document.getElementById("menu");
-  m.style.left = (m.style.left === "0px") ? "-100%" : "0";
+  m.style.left = (m.style.left=="0px")?"-100%":"0";
 }
 
-/* COMPARTIR */
 function shareApp(){
   if(navigator.share){
     navigator.share({
       title:"Son Caribe Stereo",
-      text:"Escucha en vivo",
       url:location.href
     });
   }else{
-    alert("Comparte: " + location.href);
+    alert(location.href);
   }
 }
 
-/* 🔥 METADATA ESTABLE */
+/* METADATA */
 setInterval(()=>{
 fetch("https://afradio.es/api/nowplaying/soncaribestereo")
 .then(r=>r.json())
 .then(d=>{
-let song = d.now_playing.song;
 document.getElementById("song").innerText =
-(song.artist ? song.artist + " - " : "") + song.title;
-})
-.catch(()=>{});
+d.now_playing.song.artist + " - " + d.now_playing.song.title;
+});
 },8000);
-
-/* 🔥 RECONEXIÓN AUTOMÁTICA */
-audio.addEventListener("error", ()=>{
-  setTimeout(()=>{
-    audio.load();
-    audio.play();
-  },3000);
-});
-
-/* 🔥 MANTENER AUDIO ACTIVO */
-document.addEventListener("visibilitychange", () => {
-  if(!document.hidden && !audio.paused){
-    audio.play();
-  }
-});
 </script>
 
 </body>
