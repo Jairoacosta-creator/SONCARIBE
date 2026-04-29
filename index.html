@@ -9,35 +9,25 @@
 body{
   margin:0;
   font-family: Arial, sans-serif;
+  background: linear-gradient(180deg,#000000cc,#000000aa),
+              url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
   height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
-}
-
-/* overlay */
-body::before{
-  content:"";
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:linear-gradient(180deg,rgba(0,0,0,0.7),rgba(255,94,0,0.5));
 }
 
 /* APP */
 .app{
-  position:relative;
-  z-index:1;
   width:100%;
-  max-width:380px;
+  max-width:360px;
   height:92vh;
-  background:rgba(0,0,0,0.55);
-  backdrop-filter:blur(15px);
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(10px);
   border-radius:25px;
-  overflow:hidden;
   display:flex;
   flex-direction:column;
+  overflow:hidden;
 }
 
 /* HEADER */
@@ -48,11 +38,11 @@ body::before{
   color:#fff;
 }
 
-.icon{cursor:pointer;font-size:22px;}
+.icon{font-size:22px;cursor:pointer}
 
 /* LOGO */
-.logo{text-align:center;}
-.logo img{width:200px;margin-top:10px;}
+.logo{text-align:center;margin-top:10px;}
+.logo img{width:180px;}
 
 /* PLAYER */
 .player{
@@ -64,32 +54,29 @@ body::before{
 }
 
 .play-btn{
-  width:100px;
-  height:100px;
+  width:90px;
+  height:90px;
   border-radius:50%;
-  border:none;
-  font-size:35px;
-  color:#fff;
   background:linear-gradient(45deg,#ff3c00,#ff8c00);
+  border:none;
+  color:#fff;
+  font-size:30px;
 }
 
-/* VOLUMEN */
-input[type=range]{width:70%;margin-top:20px;}
+/* TEXTO */
+#song{margin-top:15px;color:#eee;font-size:14px;text-align:center}
 
-#song{margin-top:15px;color:#eee;text-align:center;}
-
-/* ICONOS */
+/* REDES */
 .footer{
   display:flex;
-  justify-content:center;
-  gap:20px;
+  justify-content:space-around;
   padding:15px;
 }
 
-.icon-btn svg{
-  width:26px;
-  height:26px;
-  fill:#ff8c00;
+.footer a{
+  color:#ff8c00;
+  font-size:22px;
+  text-decoration:none;
 }
 
 /* MENU */
@@ -101,7 +88,7 @@ input[type=range]{width:70%;margin-top:20px;}
   height:100%;
   background:#000;
   transition:.3s;
-  z-index:5;
+  padding-top:50px;
 }
 
 .menu a{
@@ -110,34 +97,6 @@ input[type=range]{width:70%;margin-top:20px;}
   color:#fff;
   text-decoration:none;
 }
-
-/* MODAL */
-.modal{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:#000;
-  display:none;
-  z-index:4;
-}
-
-.modal iframe{
-  width:100%;
-  height:100%;
-  border:none;
-}
-
-.close{
-  position:absolute;
-  top:10px;
-  right:15px;
-  color:#fff;
-  font-size:20px;
-  z-index:6;
-  cursor:pointer;
-}
 </style>
 </head>
 
@@ -145,61 +104,36 @@ input[type=range]{width:70%;margin-top:20px;}
 
 <div class="app">
 
-<!-- MENU -->
 <div id="menu" class="menu">
-  <a href="#" onclick="closeMenu()">🏠 Inicio</a>
-  <a href="#" onclick="openPage('https://afradio.es/public/soncaribestereo/schedule')">📅 Programación</a>
-  <a href="#" onclick="openPage('https://tusitio.com/noticias')">📰 Noticias</a>
-  <a href="#" onclick="openPage('https://afradio.es/public/soncaribestereo/podcasts')">🎧 Podcast</a>
+<a href="#" onclick="closeMenu()">Inicio</a>
+<a href="https://afradio.es/public/soncaribestereo/schedule">Programación</a>
+<a href="#">Noticias</a>
+<a href="https://afradio.es/public/soncaribestereo/podcasts">Podcast</a>
 </div>
 
-<!-- HEADER -->
 <div class="header">
-  <div class="icon" onclick="toggleMenu()">☰</div>
-  <div class="icon" onclick="shareApp()">🔗</div>
+<div class="icon" onclick="toggleMenu()">☰</div>
+<div class="icon">🔗</div>
 </div>
 
-<!-- LOGO -->
 <div class="logo">
-  <img src="https://i.postimg.cc/jnjszb5C/tu-imagen.png">
+<img src="https://i.postimg.cc/jnjszb5C/tu-imagen.png">
 </div>
 
-<!-- PLAYER -->
 <div class="player">
 <button id="playBtn" class="play-btn">▶</button>
-<input type="range" min="0" max="1" step="0.01" value="1" id="vol">
 <div id="song">Presiona play</div>
 
 <audio id="radio">
-  <source src="https://afradio.es/listen/soncaribestereo/radio.mp3">
+<source src="https://afradio.es/listen/soncaribestereo/radio.mp3">
 </audio>
 </div>
 
-<!-- ICONOS REALES -->
 <div class="footer">
-
-<a class="icon-btn" href="https://www.facebook.com/pablo.h.polo.9">
-<svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.6 9.9v-7H8v-3h2.4V9.5c0-2.4 1.4-3.7 3.5-3.7 1 0 2 .1 2 .1v2.3h-1.2c-1.2 0-1.6.7-1.6 1.5V12H17l-.5 3h-2.4v7A10 10 0 0022 12"/></svg>
-</a>
-
-<a class="icon-btn" href="whatsapp://send?phone=573173813699">
-<svg viewBox="0 0 24 24"><path d="M20 3.5A11.9 11.9 0 0012 .1 12 12 0 002 20l-2 4 4-2a12 12 0 008-2.1 12 12 0 008-20.4z"/></svg>
-</a>
-
-<a class="icon-btn" href="https://tiktok.com/@pauloturo">
-<svg viewBox="0 0 24 24"><path d="M9 3v12a3 3 0 11-3-3"/></svg>
-</a>
-
-<a class="icon-btn" href="https://afradio.es/public/soncaribestereo/podcasts">
-<svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 00-7 7v3a7 7 0 0014 0V9a7 7 0 00-7-7z"/></svg>
-</a>
-
-</div>
-
-<!-- MODAL -->
-<div id="modal" class="modal">
-<div class="close" onclick="closePage()">✕</div>
-<iframe id="frame"></iframe>
+<a href="https://www.facebook.com/pablo.h.polo.9">F</a>
+<a href="whatsapp://send?phone=573173813699">W</a>
+<a href="https://tiktok.com/@pauloturo">T</a>
+<a href="https://afradio.es/public/soncaribestereo/podcasts">P</a>
 </div>
 
 </div>
@@ -207,48 +141,19 @@ input[type=range]{width:70%;margin-top:20px;}
 <script>
 const audio=document.getElementById("radio");
 const btn=document.getElementById("playBtn");
-const vol=document.getElementById("vol");
 
 btn.onclick=()=>{
- if(audio.paused){audio.play();btn.innerHTML="⏸";}
- else{audio.pause();btn.innerHTML="▶";}
+if(audio.paused){audio.play();btn.innerHTML="⏸";}
+else{audio.pause();btn.innerHTML="▶";}
 };
 
-vol.oninput=()=>audio.volume=vol.value;
-
-/* MENU */
 function toggleMenu(){
- let m=document.getElementById("menu");
- m.style.left=(m.style.left=="0px")?"-100%":"0";
+let m=document.getElementById("menu");
+m.style.left=(m.style.left=="0px")?"-100%":"0";
 }
-
-/* MODAL */
-function openPage(url){
- document.getElementById("frame").src=url;
- document.getElementById("modal").style.display="block";
- document.getElementById("menu").style.left="-100%";
+function closeMenu(){
+document.getElementById("menu").style.left="-100%";
 }
-
-function closePage(){
- document.getElementById("modal").style.display="none";
-}
-
-/* SHARE */
-function shareApp(){
- if(navigator.share){
-  navigator.share({title:"Son Caribe Stereo",url:location.href});
- }else{alert(location.href);}
-}
-
-/* METADATA */
-setInterval(()=>{
-fetch("https://afradio.es/api/nowplaying/soncaribestereo")
-.then(r=>r.json())
-.then(d=>{
-document.getElementById("song").innerText=
-d.now_playing.song.artist+" - "+d.now_playing.song.title;
-});
-},8000);
 </script>
 
 </body>
