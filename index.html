@@ -16,7 +16,7 @@ body{
   align-items:center;
 }
 
-/* OVERLAY OSCURO */
+/* overlay */
 body::before{
   content:"";
   position:absolute;
@@ -35,50 +35,71 @@ body::before{
   color:#fff;
 }
 
+/* MENU */
+.menu{
+  position:absolute;
+  left:-100%;
+  top:0;
+  width:70%;
+  height:100%;
+  background:#000;
+  z-index:5;
+  transition:.3s;
+  padding-top:60px;
+}
+.menu a{
+  display:block;
+  padding:15px;
+  color:#fff;
+  text-decoration:none;
+}
+
 /* HEADER */
 .header{
   position:absolute;
   top:15px;
   left:15px;
-  right:15px;
-  display:flex;
-  justify-content:space-between;
-  z-index:2;
+  z-index:6;
+}
+.menu-btn{
+  font-size:22px;
+  cursor:pointer;
 }
 
-.icon{
-  font-size:22px;
+/* LOGO */
+.logo{
+  position:absolute;
+  top:40px;
+  width:100%;
+  text-align:center;
+  z-index:4;
+}
+.logo img{
+  width:160px;
 }
 
 /* TITULO */
 .title{
   position:absolute;
-  top:120px;
+  top:150px;
   width:100%;
   text-align:center;
-  z-index:2;
 }
-
 .title h1{
   margin:0;
-  font-size:32px;
-  font-weight:bold;
+  font-size:28px;
 }
-
 .title span{
-  font-size:14px;
-  letter-spacing:2px;
+  font-size:12px;
 }
 
 /* EN VIVO */
 .live{
   position:absolute;
-  top:190px;
+  top:210px;
   width:100%;
   text-align:center;
-  z-index:2;
 }
-
 .live span{
   background:red;
   padding:5px 12px;
@@ -86,18 +107,16 @@ body::before{
   font-size:12px;
 }
 
-/* PLAYER CENTRAL */
+/* PLAYER */
 .player{
   position:absolute;
   top:260px;
   width:100%;
   text-align:center;
-  z-index:2;
 }
-
 .play-btn{
-  width:120px;
-  height:120px;
+  width:110px;
+  height:110px;
   border-radius:50%;
   background:radial-gradient(circle,#ff3c00,#ff0000);
   box-shadow:0 0 40px red;
@@ -109,45 +128,37 @@ body::before{
 /* INFO */
 .info{
   position:absolute;
-  top:400px;
+  top:390px;
   width:100%;
   text-align:center;
-  z-index:2;
 }
-
-.info h3{
-  margin:5px;
-}
-
-.info p{
-  margin:0;
-  font-size:12px;
-  color:#ccc;
-}
+.info h3{margin:5px;}
+.info p{margin:0;font-size:12px;color:#ccc;}
 
 /* CONTROLES */
 .controls{
   position:absolute;
-  bottom:100px;
+  bottom:120px;
   width:100%;
   display:flex;
   justify-content:center;
   gap:40px;
-  font-size:24px;
+  font-size:22px;
 }
 
-/* FOOTER */
-.footer{
+/* REDES */
+.social{
   position:absolute;
-  bottom:20px;
+  bottom:25px;
   width:100%;
   display:flex;
   justify-content:space-around;
-  font-size:14px;
 }
 
-.footer div{
-  text-align:center;
+.social a svg{
+  width:24px;
+  height:24px;
+  fill:#ff8c00;
 }
 </style>
 </head>
@@ -156,40 +167,72 @@ body::before{
 
 <div class="app">
 
+<!-- MENU -->
+<div id="menu" class="menu">
+  <a href="#" onclick="closeMenu()">Inicio</a>
+  <a href="https://afradio.es/public/soncaribestereo/schedule" target="_blank">Programación</a>
+  <a href="https://tusitio.com/noticias" target="_blank">Noticias</a>
+  <a href="https://afradio.es/public/soncaribestereo/podcasts" target="_blank">Podcast</a>
+</div>
+
+<!-- HEADER -->
 <div class="header">
-<div>☰</div>
-<div>🔗</div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
 </div>
 
+<!-- LOGO -->
+<div class="logo">
+  <img src="https://i.postimg.cc/jnjszb5C/tu-imagen.png">
+</div>
+
+<!-- TITULO -->
 <div class="title">
-<h1>SON CARIBE</h1>
-<span>STEREO</span>
+  <h1>SON CARIBE</h1>
+  <span>STEREO</span>
 </div>
 
+<!-- EN VIVO -->
 <div class="live">
-<span>● EN VIVO</span>
+  <span>● EN VIVO</span>
 </div>
 
+<!-- PLAYER -->
 <div class="player">
-<button id="playBtn" class="play-btn">▶</button>
+  <button id="playBtn" class="play-btn">▶</button>
 </div>
 
+<!-- INFO -->
 <div class="info">
-<h3>Son Caribe Stereo</h3>
-<p>La Mejor Música del Caribe</p>
+  <h3>Son Caribe Stereo</h3>
+  <p>La Mejor Música del Caribe</p>
 </div>
 
+<!-- CONTROLES -->
 <div class="controls">
-<div>⏮</div>
-<div>⏸</div>
-<div>⏭</div>
+  <div>⏮</div>
+  <div id="ctrlPlay">⏸</div>
+  <div>⏭</div>
 </div>
 
-<div class="footer">
-<div>Podcast</div>
-<div>Facebook</div>
-<div>WhatsApp</div>
-<div>TikTok</div>
+<!-- REDES -->
+<div class="social">
+
+<a href="https://afradio.es/public/soncaribestereo/podcasts">
+<svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 00-7 7v3a7 7 0 0014 0V9a7 7 0 00-7-7z"/></svg>
+</a>
+
+<a href="https://www.facebook.com/pablo.h.polo.9">
+<svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.6 9.9v-7H8v-3h2.4V9.5c0-2.4 1.4-3.7 3.5-3.7 1 0 2 .1 2 .1v2.3h-1.2c-1.2 0-1.6.7-1.6 1.5V12H17l-.5 3h-2.4v7A10 10 0 0022 12"/></svg>
+</a>
+
+<a href="whatsapp://send?phone=573173813699">
+<svg viewBox="0 0 24 24"><path d="M20 3.5A11.9 11.9 0 0012 .1 12 12 0 002 20l-2 4 4-2a12 12 0 008-2.1 12 12 0 008-20.4z"/></svg>
+</a>
+
+<a href="https://tiktok.com/@pauloturo">
+<svg viewBox="0 0 24 24"><path d="M9 3v12a3 3 0 11-3-3"/></svg>
+</a>
+
 </div>
 
 <audio id="radio">
@@ -203,15 +246,25 @@ const audio=document.getElementById("radio");
 const btn=document.getElementById("playBtn");
 
 btn.onclick=()=>{
-if(audio.paused){
-audio.play();
-btn.innerHTML="⏸";
-}else{
-audio.pause();
-btn.innerHTML="▶";
-}
+ if(audio.paused){
+  audio.play();
+  btn.innerHTML="⏸";
+ }else{
+  audio.pause();
+  btn.innerHTML="▶";
+ }
 };
+
+/* MENU */
+function toggleMenu(){
+ let m=document.getElementById("menu");
+ m.style.left=(m.style.left=="0px")?"-100%":"0";
+}
+function closeMenu(){
+ document.getElementById("menu").style.left="-100%";
+}
 </script>
 
 </body>
 </html>
+
