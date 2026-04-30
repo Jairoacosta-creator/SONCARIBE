@@ -8,94 +8,146 @@
 <style>
 body{
   margin:0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(180deg,#000000cc,#000000aa),
-              url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
+  font-family:Arial;
+  background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
   height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
 }
 
+/* OVERLAY OSCURO */
+body::before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:linear-gradient(to top,rgba(0,0,0,0.9),rgba(0,0,0,0.2));
+}
+
 /* APP */
 .app{
-  width:100%;
-  max-width:360px;
+  position:relative;
+  width:360px;
   height:92vh;
-  background:rgba(0,0,0,0.6);
-  backdrop-filter:blur(10px);
-  border-radius:25px;
-  display:flex;
-  flex-direction:column;
+  border-radius:30px;
   overflow:hidden;
+  color:#fff;
 }
 
 /* HEADER */
 .header{
+  position:absolute;
+  top:15px;
+  left:15px;
+  right:15px;
   display:flex;
   justify-content:space-between;
-  padding:15px;
-  color:#fff;
+  z-index:2;
 }
 
-.icon{font-size:22px;cursor:pointer}
+.icon{
+  font-size:22px;
+}
 
-/* LOGO */
-.logo{text-align:center;margin-top:10px;}
-.logo img{width:180px;}
+/* TITULO */
+.title{
+  position:absolute;
+  top:120px;
+  width:100%;
+  text-align:center;
+  z-index:2;
+}
 
-/* PLAYER */
+.title h1{
+  margin:0;
+  font-size:32px;
+  font-weight:bold;
+}
+
+.title span{
+  font-size:14px;
+  letter-spacing:2px;
+}
+
+/* EN VIVO */
+.live{
+  position:absolute;
+  top:190px;
+  width:100%;
+  text-align:center;
+  z-index:2;
+}
+
+.live span{
+  background:red;
+  padding:5px 12px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+/* PLAYER CENTRAL */
 .player{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+  position:absolute;
+  top:260px;
+  width:100%;
+  text-align:center;
+  z-index:2;
 }
 
 .play-btn{
-  width:90px;
-  height:90px;
+  width:120px;
+  height:120px;
   border-radius:50%;
-  background:linear-gradient(45deg,#ff3c00,#ff8c00);
+  background:radial-gradient(circle,#ff3c00,#ff0000);
+  box-shadow:0 0 40px red;
   border:none;
+  font-size:40px;
   color:#fff;
-  font-size:30px;
 }
 
-/* TEXTO */
-#song{margin-top:15px;color:#eee;font-size:14px;text-align:center}
+/* INFO */
+.info{
+  position:absolute;
+  top:400px;
+  width:100%;
+  text-align:center;
+  z-index:2;
+}
 
-/* REDES */
+.info h3{
+  margin:5px;
+}
+
+.info p{
+  margin:0;
+  font-size:12px;
+  color:#ccc;
+}
+
+/* CONTROLES */
+.controls{
+  position:absolute;
+  bottom:100px;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  font-size:24px;
+}
+
+/* FOOTER */
 .footer{
+  position:absolute;
+  bottom:20px;
+  width:100%;
   display:flex;
   justify-content:space-around;
-  padding:15px;
+  font-size:14px;
 }
 
-.footer a{
-  color:#ff8c00;
-  font-size:22px;
-  text-decoration:none;
-}
-
-/* MENU */
-.menu{
-  position:absolute;
-  left:-100%;
-  top:0;
-  width:70%;
-  height:100%;
-  background:#000;
-  transition:.3s;
-  padding-top:50px;
-}
-
-.menu a{
-  display:block;
-  padding:15px;
-  color:#fff;
-  text-decoration:none;
+.footer div{
+  text-align:center;
 }
 </style>
 </head>
@@ -104,37 +156,45 @@ body{
 
 <div class="app">
 
-<div id="menu" class="menu">
-<a href="#" onclick="closeMenu()">Inicio</a>
-<a href="https://afradio.es/public/soncaribestereo/schedule">Programación</a>
-<a href="#">Noticias</a>
-<a href="https://afradio.es/public/soncaribestereo/podcasts">Podcast</a>
-</div>
-
 <div class="header">
-<div class="icon" onclick="toggleMenu()">☰</div>
-<div class="icon">🔗</div>
+<div>☰</div>
+<div>🔗</div>
 </div>
 
-<div class="logo">
-<img src="https://i.postimg.cc/jnjszb5C/tu-imagen.png">
+<div class="title">
+<h1>SON CARIBE</h1>
+<span>STEREO</span>
+</div>
+
+<div class="live">
+<span>● EN VIVO</span>
 </div>
 
 <div class="player">
 <button id="playBtn" class="play-btn">▶</button>
-<div id="song">Presiona play</div>
+</div>
+
+<div class="info">
+<h3>Son Caribe Stereo</h3>
+<p>La Mejor Música del Caribe</p>
+</div>
+
+<div class="controls">
+<div>⏮</div>
+<div>⏸</div>
+<div>⏭</div>
+</div>
+
+<div class="footer">
+<div>Podcast</div>
+<div>Facebook</div>
+<div>WhatsApp</div>
+<div>TikTok</div>
+</div>
 
 <audio id="radio">
 <source src="https://afradio.es/listen/soncaribestereo/radio.mp3">
 </audio>
-</div>
-
-<div class="footer">
-<a href="https://www.facebook.com/pablo.h.polo.9">F</a>
-<a href="whatsapp://send?phone=573173813699">W</a>
-<a href="https://tiktok.com/@pauloturo">T</a>
-<a href="https://afradio.es/public/soncaribestereo/podcasts">P</a>
-</div>
 
 </div>
 
@@ -143,17 +203,14 @@ const audio=document.getElementById("radio");
 const btn=document.getElementById("playBtn");
 
 btn.onclick=()=>{
-if(audio.paused){audio.play();btn.innerHTML="⏸";}
-else{audio.pause();btn.innerHTML="▶";}
+if(audio.paused){
+audio.play();
+btn.innerHTML="⏸";
+}else{
+audio.pause();
+btn.innerHTML="▶";
+}
 };
-
-function toggleMenu(){
-let m=document.getElementById("menu");
-m.style.left=(m.style.left=="0px")?"-100%":"0";
-}
-function closeMenu(){
-document.getElementById("menu").style.left="-100%";
-}
 </script>
 
 </body>
